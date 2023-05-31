@@ -295,3 +295,4 @@ void SetSweeped(COORDINATE coord){
     map[coord.x][coord.y].isSweeped = 1;
     rest--;
 }
+
