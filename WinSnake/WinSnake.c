@@ -64,8 +64,9 @@ SNAKE_NODE *head, *tail;
 COORDINATE food;
 
 // 游戏状态结构体
-struct
+struct state
 {
+    unsigned __int8 isStarted; //按任意键开始游戏
     unsigned __int8 direction;  // 方向
     COLORREF foodColor; //随机颜色食物
     unsigned int points;        // 得分
@@ -362,6 +363,7 @@ void GameInit(HWND hWnd)
     state.ifGetPoint = 0;
     state.pause = 0;
     state.moveable = 1;
+    state.isStarted = 0;
     // 初始化蛇
     CreateSnake();
     //提示说明
@@ -369,8 +371,6 @@ void GameInit(HWND hWnd)
                        (LPCSTR) "Use \"WASD\" or \"Direction key\" to move the snake\nUse \"P\" to pause\nPlease swtich to English input mode or enable uppercase input",
                        (LPCSTR) "Readme",
                        MB_OKCANCEL) == IDOK)
-    // 设置计时器，计时器每speed毫秒发出一条WM_TIMER消息
-    SetTimer(hWnd, 1, option.speed, NULL);
     // 放置第一个食物
     SetFood();
 }
@@ -378,6 +378,12 @@ void GameInit(HWND hWnd)
 // 键盘相应
 void KeyProc(char newDire, HWND hWnd)
 {
+    if(!state.isStarted)
+    {
+        state.isStarted = 1;
+        // 设置计时器，计时器每speed毫秒发出一条WM_TIMER消息
+        SetTimer(hWnd, 1, option.speed, NULL);
+    }
     // 按下按键后在蛇头转向之前不会再转向
     if (!state.moveable)
         return;
