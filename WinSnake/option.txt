@@ -1,0 +1,10 @@
+SIZE_OF_MAP 30
+SIZE_OF_BLOCK 12
+INIT_LEN 3
+SPEED 200
+
+说明：
+SIZE_OF_MAP 地图大小，最小15，最大40（其他的无效）
+SIZE_OF_BLOCK 蛇身大小，最小6，最大18
+INIT_LEN 初始长度，最小3，最大地图大小的一半
+SPEED 移动间隔，单位毫秒，越小越快，最小30
